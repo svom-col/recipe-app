@@ -19,6 +19,7 @@ RUN npm ci --omit=dev
 FROM base AS runner
 ENV NODE_ENV=production
 ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
 RUN apk add --no-cache curl
 RUN addgroup --system --gid 1001 nodejs
