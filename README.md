@@ -239,9 +239,9 @@ Aplikace poběží na:
 http://localhost:3000
 ```
 
-## Doporučené npm scripts
+## npm scripts
 
-Projekt by měl obsahovat přibližně tyto skripty:
+Projekt obsahuje tyto základní skripty:
 
 ```
 {
@@ -249,7 +249,7 @@ Projekt by měl obsahovat přibližně tyto skripty:
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
@@ -258,7 +258,7 @@ Projekt by měl obsahovat přibližně tyto skripty:
 }
 ```
 
-Finální podoba skriptů se může lišit podle implementace Dockerfile a Next.js standalone buildu.
+Next.js 16 už nepoužívá příkaz `next lint`, proto projekt spouští ESLint přímo přes `eslint .`.
 
 ## Databázové migrace
 
@@ -281,6 +281,8 @@ npx prisma db push
 ```
 
 Migrace se nemají spouštět během Docker image buildu.
+
+Prisma 7 načítá databázovou URL z `prisma.config.ts`. V produkci musí být nastavená proměnná `DATABASE_URL`.
 
 Pro aktuální single-instance MVP v Coolify je přijatelné spustit migrace při startu kontejneru, například:
 
